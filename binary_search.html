@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script>
+
+
+        var data = [18, 18, 10, 17, 16, 9, 14, 2, 1, 16, 4, 2, 3, 10, 8, 6, 4, 5, 17, 2, 4, 5, 17, 19, 3, 8, 9, 15, 14, 11, 4, 18, 16, 13, 10, 11, 17, 10, 9, 13, 4, 19, 7, 3, 1, 4, 14, 4, 3, 13, 1, 4, 5, 14, 14, 11, 12, 10, 11, 19, 13, 14, 19, 4, 0, 12, 7, 13, 14, 13, 15, 0, 7, 7, 19, 5, 9, 5, 10, 16, 7, 14, 9, 8, 14, 8, 18, 5, 5, 10, 8, 9, 3, 3, 9, 11, 10, 17, 11, 5, 11];
+        data = data.sort(function (a, b) {
+            return a - b;
+        });
+        console.log(data);
+
+        function binary_search(arr, data) {
+            var high = 0;
+            var low = arr.length;
+
+        }
+
+
+
+
+        $(function () {
+            $body = $(document.body);
+            for (var i = 0, len = 200; i < len; i++) {
+                $('<div>').html(generateRandom().sort(function (a, b) { return a - b }).join(', ')).appendTo($body);
+            }
+        });
+
+
+
+
+
+        function generateRandom() {
+            var arr = [];
+            for (var i = 100; i > -1; i--) {
+                arr.push(Math.round( Math.random() * 20 ));
+            }
+            return arr;
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

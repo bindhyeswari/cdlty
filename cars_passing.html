@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="base.css"/>
+</head>
+<body>
+
+    <button id="btn1">Calculate by Web Worker</button>
+    <button id="btn2">Calculate in-page</button>
+
+    <div id="result">
+
+    </div>
+    <script>
+        var result = document.getElementById('result');
+        document.body.addEventListener('click', function (event) {
+            if (event.target.id === 'btn1') {
+                var worker = new Worker('worker.js');
+                worker.postMessage('');
+                worker.onmessage = function (event_worker) {
+                    result.innerHTML = event_worker.data.probability + ' (from web worker), Time taken: '
+                            + event_worker.data.time;
+                };
+            } else {
+                if (event.target.id === 'btn2') {
+                    var obj = calculateProbability();
+                    result.innerHTML = obj.probability + ' (main page), Time taken: ' + obj.time;
+                }
+            }
+        });
+
+        function calculateProbability() {
+            var start = new Date();
+            var repeats = 0;
+            var repeat = false;
+
+// generate array
+            for (var j = 0, len = 500000; j < len; j++) {
+                var arr = [];
+                repeat = false;
+                for (var i = 0; i < 20; i++) {
+                    var num =  Math.round( Math.random() * 100 );
+                    if (arr.indexOf(num) !== -1) {
+                        repeat = true;
+                        break;
+                    } else {
+                        arr.push(num);
+                    }
+                }
+                if (repeat) repeats++;
+            }
+            var end = new Date();
+            return {
+                probability: repeats / 500000,
+                time: (end - start)
+            };
+
+// update repeats else unique
+        }
+    </script>
+</body>
+</html>
